@@ -20,6 +20,12 @@ builder.Services.AddApplication();
 
 
 var app = builder.Build();
+app.UseCors(options =>
+{
+    options.WithOrigins("https://localhost:7134");
+    options.AllowAnyMethod();
+    options.AllowAnyHeader();
+});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

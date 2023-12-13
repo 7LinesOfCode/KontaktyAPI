@@ -17,30 +17,31 @@ namespace KontaktyAPI.Application.Services
     {
         private readonly IMapper _mapper;
         private readonly IContactRepository _repo;
+
         public ContactService(IMapper mapper, IContactRepository repo)
         {
             _mapper = mapper;
             _repo = repo;
         }
 
-        public ContactDetailsVm GetContact(int id)
+        public async Task<ContactDetailsVm> GetContactAsync(int id)
         {
-            var contact =  _repo.GetContact(id);
+            var contact = await _repo.GetContactAsync(id);
             var contactVm = _mapper.Map<ContactDetailsVm>(contact);
             return contactVm;
         }
 
-        public ListContactForListVm GetContacts(int pageSize, int pageNo, string? searchString, int? selectedCategoryId)
+        public async Task<ListContactForListVm> GetContactsAsync(int pageSize, int pageNo, string? searchString, int? selectedCategoryId)
         {
-            var query = _repo.GetContacts(); 
+            var query = await _repo.GetContactsAsync();
 
-            var categoriesQuery = _repo.GetCategories(); 
+            var categoriesQuery = await _repo.GetCategoriesAsync();
 
             List<string> Categories = new List<string>();
 
             foreach (var category in categoriesQuery)
             {
-                if(category != null && !Categories.Contains(category.Name))
+                if (category != null && !Categories.Contains(category.Name))
                 {
                     Categories.Add(category.Name);
                 }
@@ -56,12 +57,14 @@ namespace KontaktyAPI.Application.Services
                 searchString = "";
             }
 
-            var contacts = query.Where(c=>(c.FirstName + c.LastName).Contains(searchString)).ProjectTo<ContactForListVm>(_mapper.ConfigurationProvider)
+            var contacts = query
+                .Where(c => (c.FirstName + c.LastName).Contains(searchString))
+                .ProjectTo<ContactForListVm>(_mapper.ConfigurationProvider)
                 .ToList();
 
             var contactsToShow = contacts.Skip(pageSize * (pageNo - 1)).Take(pageSize).ToList();
 
-            var ContactList = new ListContactForListVm()
+            var contactList = new ListContactForListVm()
             {
                 PageSize = pageSize,
                 CurrentylPage = pageNo,
@@ -72,52 +75,53 @@ namespace KontaktyAPI.Application.Services
                 SelectedCategoryId = selectedCategoryId
             };
 
-            return ContactList;
+            return contactList;
         }
 
-        public IEnumerable<CategoryVm> GetCategories()
+        public async Task<IEnumerable<CategoryVm>> GetCategoriesAsync()
         {
-            var categories = _repo.GetCategories().ProjectTo<CategoryVm>(_mapper.ConfigurationProvider).ToList();
-
-            return categories;
+            var categories = await _repo.GetCategoriesAsync();
+            var categoryVms = _mapper.Map<IEnumerable<CategoryVm>>(categories);
+            return categoryVms.ToList();
         }
 
-        public IEnumerable<SubCategoryVm> GetSubCategories()
+        public async Task<IEnumerable<SubCategoryVm>> GetSubCategoriesAsync()
         {
-            var subCategories = _repo.GetSubCategories().ProjectTo<SubCategoryVm>(_mapper.ConfigurationProvider).ToList();
-            return subCategories;
+            var subCategories = await _repo.GetSubCategoriesAsync();
+            var subCategoryVms = _mapper.Map<IEnumerable<SubCategoryVm>>(subCategories);
+            return subCategoryVms.ToList();
         }
 
-        public int CreateSubCategory(SubCategoryVm subCategory)
+        public async Task<int> CreateSubCategoryAsync(SubCategoryVm subCategory)
         {
-            var newSubCategory =_mapper.Map<SubCategory>(subCategory);
-            var id =  _repo.AddNewSubCategory(newSubCategory);
+            var newSubCategory = _mapper.Map<SubCategory>(subCategory);
+            var id = await _repo.AddNewSubCategoryAsync(newSubCategory);
             return id;
         }
 
-        public int CreateContact(ContactDetailsVm contactDetails)
+        public async Task<int> CreateContactAsync(ContactDetailsVm contactDetails)
         {
             var newContact = _mapper.Map<Contact>(contactDetails);
-            var id = _repo.AddNewContact(newContact);
+            var id = await _repo.AddNewContactAsync(newContact);
             return id;
         }
 
-        public bool DeleteContact(int id)
+        public async Task<bool> DeleteContactAsync(int id)
         {
-             var response = _repo.DeleteContact(id);
+            var response = await _repo.DeleteContactAsync(id);
             return response;
         }
 
-        public bool EditContact(int id,ContactDetailsVm contactDetails)
+        public async Task<bool> EditContactAsync(int id, ContactDetailsVm contactDetails)
         {
-            var contactToUpdate = _repo.GetContact(id);
+            var contactToUpdate = await _repo.GetContactAsync(id);
             if (contactToUpdate == null)
             {
                 return false;
             }
 
-            var EdittedContact = _mapper.Map<Contact>(contactDetails);
-            _repo.UpdateContact(id, EdittedContact);
+            var editedContact = _mapper.Map<Contact>(contactDetails);
+            await _repo.UpdateContactAsync(id, editedContact);
             return true;
         }
     }

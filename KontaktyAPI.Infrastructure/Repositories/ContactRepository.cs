@@ -12,70 +12,70 @@ namespace KontaktyAPI.Infrastructure.Repositories
     public class ContactRepository : IContactRepository
     {
         private readonly dbContext _context;
+
         public ContactRepository(dbContext context)
         {
             _context = context;
         }
 
-        public IQueryable<Contact> GetContacts()
+        public async Task<IQueryable<Contact>> GetContactsAsync()
         {
-            return _context.Contacts;
+            return await Task.FromResult(_context.Contacts.AsQueryable());
         }
 
-        public Contact GetContact(int id)
+        public async Task<Contact> GetContactAsync(int id)
         {
-            var contactModel = _context.Contacts.FirstOrDefault(c => c.Id == id);
-            return contactModel;
+            return await _context.Contacts.FirstOrDefaultAsync(c => c.Id == id);
         }
 
-        public IQueryable<Category> GetCategories()
+        public async Task<IQueryable<Category>> GetCategoriesAsync()
         {
-            return _context.Categories;
+            return await Task.FromResult(_context.Categories.AsQueryable());
         }
 
-        public IQueryable<SubCategory> GetSubCategories()
+        public async Task<IQueryable<SubCategory>> GetSubCategoriesAsync()
         {
-            return _context.SubCategories;
+            return await Task.FromResult(_context.SubCategories.AsQueryable());
         }
 
-        public int AddNewSubCategory(SubCategory subCategory)
+        public async Task<int> AddNewSubCategoryAsync(SubCategory subCategory)
         {
             _context.SubCategories.Add(subCategory);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return subCategory.Id;
         }
 
-        public int AddNewContact(Contact contact)
+        public async Task<int> AddNewContactAsync(Contact contact)
         {
             _context.Contacts.Add(contact);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             return contact.Id;
         }
 
-        public void UpdateContact(int id,Contact UpdatedContact)
+        public async Task UpdateContactAsync(int id, Contact UpdatedContact)
         {
-            var dbContact = GetContact(id);
-            if(dbContact != null)
+            var dbContact = await GetContactAsync(id);
+            if (dbContact != null)
             {
                 dbContact.Id = id;
-                dbContact.FirstName= UpdatedContact.FirstName;
+                dbContact.FirstName = UpdatedContact.FirstName;
                 dbContact.LastName = UpdatedContact.LastName;
                 dbContact.Email = UpdatedContact.Email;
                 dbContact.BirthDay = UpdatedContact.BirthDay;
                 dbContact.PhoneNumber = UpdatedContact.PhoneNumber;
                 dbContact.CategoryId = UpdatedContact.CategoryId;
                 dbContact.SubCategoryId = UpdatedContact.SubCategoryId;
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
         }
 
-        public bool DeleteContact(int id)
+        public async Task<bool> DeleteContactAsync(int id)
         {
-            var contactToDelete = GetContact(id);
-            if(contactToDelete != null)
+            var contactToDelete = await GetContactAsync(id);
+            if (contactToDelete != null)
             {
                 _context.Contacts.Remove(contactToDelete);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
                 return true;
             }
             return false;

@@ -10,13 +10,13 @@ namespace KontaktyAPI.Application.Interfaces
 {
     public interface IContactService
     {
-        public ListContactForListVm GetContacts(int pageSize, int pageNo, string? searchString, int? selectedCategoryId);
-        public ContactDetailsVm GetContact(int id);
-        public IEnumerable<CategoryVm> GetCategories();
-        public IEnumerable<SubCategoryVm> GetSubCategories();
-        public int CreateSubCategory(SubCategoryVm subCategory);
-        public int CreateContact(ContactDetailsVm contactDetails);
-        public bool DeleteContact(int id);
-        public bool EditContact(int id,ContactDetailsVm contactDetails);
+        Task<ListContactForListVm> GetContactsAsync(int pageSize, int pageNo, string? searchString, int? selectedCategoryId);
+        Task<ContactDetailsVm> GetContactAsync(int id);
+        Task<IEnumerable<CategoryVm>> GetCategoriesAsync();
+        Task<IEnumerable<SubCategoryVm>> GetSubCategoriesAsync();
+        Task<int> CreateSubCategoryAsync(SubCategoryVm subCategory);
+        Task<int> CreateContactAsync(ContactDetailsVm contactDetails);
+        Task<bool> DeleteContactAsync(int id);
+        Task<bool> EditContactAsync(int id, ContactDetailsVm contactDetails);
     }
 }
