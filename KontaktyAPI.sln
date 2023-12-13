@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KontaktyAPI", "KontaktyAPI\KontaktyAPI.csproj", "{50336356-435E-40C7-9F8D-0CCA25F23218}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{053ADED9-5C36-42EB-90B8-7F9C28EC2279}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{93B855E8-7BC5-4127-ABD2-3D881F90F046}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infastructure", "Infastructure", "{4DCBEB6A-382A-4BB3-A4BC-60D47552FAC3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{38B61585-5BE1-42EE-A96D-F815236C69DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KontaktyAPI.Application", "KontaktyAPI.Application\KontaktyAPI.Application.csproj", "{49ABB11D-A9CE-409A-ABFF-8B2C5093BB3B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KontaktyAPI.Domain", "KontaktyAPI.Domain\KontaktyAPI.Domain.csproj", "{501005FE-7CF4-4225-B2DB-98EF0BADCFE0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KontaktyAPI.Infrastructure", "KontaktyAPI.Infrastructure\KontaktyAPI.Infrastructure.csproj", "{3E783CA5-BEDC-47E3-87B8-4BD3F50731FF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{50336356-435E-40C7-9F8D-0CCA25F23218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50336356-435E-40C7-9F8D-0CCA25F23218}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50336356-435E-40C7-9F8D-0CCA25F23218}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50336356-435E-40C7-9F8D-0CCA25F23218}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49ABB11D-A9CE-409A-ABFF-8B2C5093BB3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49ABB11D-A9CE-409A-ABFF-8B2C5093BB3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49ABB11D-A9CE-409A-ABFF-8B2C5093BB3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49ABB11D-A9CE-409A-ABFF-8B2C5093BB3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{501005FE-7CF4-4225-B2DB-98EF0BADCFE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{501005FE-7CF4-4225-B2DB-98EF0BADCFE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{501005FE-7CF4-4225-B2DB-98EF0BADCFE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{501005FE-7CF4-4225-B2DB-98EF0BADCFE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E783CA5-BEDC-47E3-87B8-4BD3F50731FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E783CA5-BEDC-47E3-87B8-4BD3F50731FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E783CA5-BEDC-47E3-87B8-4BD3F50731FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E783CA5-BEDC-47E3-87B8-4BD3F50731FF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{50336356-435E-40C7-9F8D-0CCA25F23218} = {053ADED9-5C36-42EB-90B8-7F9C28EC2279}
+		{49ABB11D-A9CE-409A-ABFF-8B2C5093BB3B} = {93B855E8-7BC5-4127-ABD2-3D881F90F046}
+		{501005FE-7CF4-4225-B2DB-98EF0BADCFE0} = {38B61585-5BE1-42EE-A96D-F815236C69DF}
+		{3E783CA5-BEDC-47E3-87B8-4BD3F50731FF} = {4DCBEB6A-382A-4BB3-A4BC-60D47552FAC3}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8C9E6404-B541-4DC9-A3AE-9F327EFA5210}
+	EndGlobalSection
+EndGlobal
