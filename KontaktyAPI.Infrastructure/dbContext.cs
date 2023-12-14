@@ -1,15 +1,10 @@
 ﻿using KontaktyAPI.Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KontaktyAPI.Infrastructure
 {
-    public class dbContext : DbContext
+    public class dbContext : IdentityDbContext
     {
 
         public dbContext(DbContextOptions<dbContext> options) : base(options)
@@ -23,6 +18,7 @@ namespace KontaktyAPI.Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.SeedData();
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
