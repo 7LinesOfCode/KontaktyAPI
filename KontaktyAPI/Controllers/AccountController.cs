@@ -17,6 +17,7 @@ namespace KontaktyAPI.Controllers
         }
 
         [HttpPost]
+        [Route("/Post/Register")]
         public async Task<IActionResult> Post([FromBody] RegisterModel model)
         {
             var newUser = new IdentityUser { UserName = model.Email, Email = model.Email };

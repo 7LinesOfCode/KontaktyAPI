@@ -3,6 +3,7 @@ using KontaktyAPI.Application.Interfaces;
 using KontaktyAPI.Application.Viewmodels.Collections;
 using KontaktyAPI.Application.Viewmodels.Single;
 using KontaktyAPI.Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -81,6 +82,7 @@ namespace KontaktyAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         [Route("/New/Contact")]
         public async Task<ActionResult> CreateContact([FromBody] ContactDetailsVm contactDetailsVm)
         {
@@ -93,6 +95,7 @@ namespace KontaktyAPI.Controllers
         }
 
         [HttpDelete]
+        [Authorize]
         [Route("/Delete/Contact/{id}")]
         public async Task<ActionResult> DeleteContact([FromRoute] int id)
         {
@@ -105,6 +108,7 @@ namespace KontaktyAPI.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         [Route("/Edit/Contact/{id}")]
         public async Task<ActionResult> EditContact([FromRoute] int id, [FromBody] ContactDetailsVm contactDetailsVm)
         {
