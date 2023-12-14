@@ -22,7 +22,7 @@ namespace KontaktyAPI.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            modelBuilder.SeedData();
         }
     }
 }
